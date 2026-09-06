@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Guía de Estudio — Finanzas I (Control 2)</title>
+<script>
+  MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+<style>
+  :root{
+    --bg:#faf8f5;
+    --paper:#ffffff;
+    --ink:#20242b;
+    --muted:#5b6472;
+    --accent:#8a3324;
+    --accent2:#0f5c52;
+    --line:#e4ddd3;
+    --box:#f4efe7;
+    --code:#2b2f36;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family: "Georgia", "Iowan Old Style", "Palatino Linotype", serif;
+    line-height:1.65;
+  }
+  .wrap{max-width:880px; margin:0 auto; padding:40px 28px 120px;}
+  header.hero{
+    background: linear-gradient(135deg, var(--accent) 0%, #5e2117 100%);
+    color:#fdf6ee;
+    padding:48px 28px;
+    text-align:center;
+    border-bottom:6px solid var(--accent2);
+  }
+  header.hero h1{ font-size:2rem; margin:0 0 8px; letter-spacing:.5px;}
+  header.hero p{ margin:4px 0; font-size:1rem; opacity:.9; font-style:italic;}
+  nav.toc{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 26px;
+    margin:32px 0;
+    box-shadow:0 2px 10px rgba(0,0,0,.04);
+  }
+  nav.toc h2{margin-top:0; font-size:1.1rem; color:var(--accent);}
+  nav.toc ol{margin:0; padding-left:22px;}
+  nav.toc li{margin:4px 0;}
+  nav.toc a{color:var(--ink); text-decoration:none; border-bottom:1px dotted var(--muted);}
+  nav.toc a:hover{color:var(--accent);}
+
+  section{margin:52px 0;}
+  h2.section-title{
+    font-size:1.5rem;
+    color:#fff;
+    background:var(--accent2);
+    padding:10px 18px;
+    border-radius:8px 8px 0 0;
+    margin:0;
+  }
+  .section-body{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-top:none;
+    border-radius:0 0 8px 8px;
+    padding:26px 28px;
+  }
+  h3{color:var(--accent); border-bottom:2px solid var(--box); padding-bottom:4px; margin-top:34px;}
+  h4{color:var(--accent2); margin-bottom:6px;}
+
+  .formula{
+    background:var(--box);
+    border-left:4px solid var(--accent2);
+    padding:14px 18px;
+    margin:16px 0;
+    border-radius:0 6px 6px 0;
+    overflow-x:auto;
+  }
+  .intuicion{
+    background:#fff8e8;
+    border:1px solid #e9d9a6;
+    border-radius:8px;
+    padding:14px 18px;
+    margin:16px 0;
+  }
+  .intuicion::before{content:"💡 Intuición"; display:block; font-weight:bold; color:#8a6d1a; margin-bottom:6px; font-family:sans-serif;}
+  .error{
+    background:#fdecea;
+    border:1px solid #f3b8b0;
+    border-radius:8px;
+    padding:14px 18px;
+    margin:16px 0;
+  }
+  .error::before{content:"⚠ Error común"; display:block; font-weight:bold; color:#9c2b1f; margin-bottom:6px; font-family:sans-serif;}
+  .paso{
+    border-left:3px solid var(--accent);
+    padding:6px 0 6px 16px;
+    margin:14px 0;
+  }
+  .paso .num{
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;
+    width:24px; height:24px;
+    border-radius:50%;
+    text-align:center;
+    line-height:24px;
+    font-size:.85rem;
+    margin-right:8px;
+    font-family:sans-serif;
+  }
+  table{border-collapse:collapse; width:100%; margin:16px 0; font-size:.95rem;}
+  th, td{border:1px solid var(--line); padding:8px 12px; text-align:left;}
+  th{background:var(--box); color:var(--accent);}
+  tr:nth-child(even) td{background:#fbf9f6;}
+  .ejercicio{
+    background:#eef6f4;
+    border:1px solid #bfe0d9;
+    border-radius:8px;
+    padding:16px 20px;
+    margin:18px 0;
+  }
+  .ejercicio h4{margin-top:0; color:var(--accent2);}
+  details.solucion{
+    margin-top:10px;
+    background:#fff;
+    border:1px dashed var(--accent2);
+    border-radius:6px;
+    padding:8px 14px;
+  }
+  details.solucion summary{
+    cursor:pointer;
+    font-weight:bold;
+    color:var(--accent);
+    font-family:sans-serif;
+    font-size:.92rem;
+  }
+  code, .rcode{
+    display:block;
+    background:var(--code);
+    color:#e6e6e6;
+    padding:12px 16px;
+    border-radius:6px;
+    font-family:"Menlo","Consolas",monospace;
+    font-size:.85rem;
+    overflow-x:auto;
+    white-space:pre;
+    margin:12px 0;
+  }
+  .badge{
+    display:inline-block;
+    background:var(--accent2);
+    color:#fff;
+    font-family:sans-serif;
+    font-size:.72rem;
+    padding:2px 8px;
+    border-radius:12px;
+    margin-left:6px;
+    vertical-align:middle;
+  }
+  .checklist li{margin:6px 0;}
+  .formulario-final td:first-child{font-weight:bold; color:var(--accent2); width:45%;}
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:.85rem;
+    margin-top:60px;
+    font-family:sans-serif;
+  }
+  .flow{
+    text-align:center;
+    font-family:sans-serif;
+    background:var(--box);
+    border-radius:8px;
+    padding:16px;
+    margin:16px 0;
+    font-size:.95rem;
+    color:var(--ink);
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>Guía de Estudio — Finanzas I</h1>
+  <p>Análisis financiero: liquidez, actividad, rentabilidad y apalancamiento</p>
+  <p>Basada en Control 2 (Secciones 1 y 2), Guía de Ayudantía y Ayudantía Extra — UDP</p>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>Índice</h2>
+  <ol>
+    <li><a href="#intro">Cómo se estructura el control y cómo estudiar</a></li>
+    <li><a href="#liquidez">Liquidez y capital de trabajo</a></li>
+    <li><a href="#actividad">Rotación, permanencia y ciclos (maduración y caja)</a></li>
+    <li><a href="#resultados">Estado de resultados y márgenes</a></li>
+    <li><a href="#rentabilidad">ROA, ROE y el modelo DuPont</a></li>
+    <li><a href="#apalancamiento">Apalancamiento operativo y financiero (GAO, GAF, GAT)</a></li>
+    <li><a href="#formulario">Formulario resumen</a></li>
+    <li><a href="#ejercicios">Ejercicios extra de práctica (con solución)</a></li>
+    <li><a href="#conceptuales">Preguntas conceptuales típicas</a></li>
+  </ol>
+</nav>
+
+<!-- ============================================================ -->
+<section id="intro">
+<h2 class="section-title">1. Cómo se estructura el control y cómo estudiar</h2>
+<div class="section-body">
+
+<p>Revisando las pautas de las Secciones 1 y 2 del Control 2, y la Guía de Ayudantía, el control
+siempre se organiza en <strong>dos preguntas grandes</strong>:</p>
+
+<table>
+<tr><th>Pregunta</th><th>Tema</th><th>Sub-preguntas típicas</th><th>Puntaje</th></tr>
+<tr><td>1</td><td>Liquidez y capital de trabajo</td>
+<td>a) Rotaciones · b) Permanencias (base 360) · c) Ciclo de maduración y ciclo de caja · d) Análisis comparado con el sector</td>
+<td>~10 pts</td></tr>
+<tr><td>2</td><td>Rentabilidad y apalancamiento</td>
+<td>a) Completar estado de resultados · b) Márgenes · c) ROA/ROE + DuPont · d) GAO/GAF/GAT · e) Análisis de riesgo</td>
+<td>~10 pts</td></tr>
+</table>
+
+<div class="intuicion">
+El control es <strong>siempre el mismo esqueleto</strong> con números distintos. Si dominas el
+orden de cálculo (rotación → permanencia → ciclo; y luego resultado → margen → ROA/ROE →
+DuPont → GAO/GAF), el 80% del control se resuelve en piloto automático. Lo que separa una
+nota 5 de una nota 7 es la <strong>interpretación</strong> al final de cada letra.
+</div>
+
+<div class="error">
+La pauta de la Sección 2 lo dice explícitamente: <em>"la omisión de desarrollo y el solo resultado
+tendría un puntaje máximo de 1 punto por ítem"</em>. Nunca entregues solo el número: siempre
+muestra la fórmula, el reemplazo numérico y una frase de interpretación.
+</div>
+
+<h3>Checklist antes de la prueba</h3>
+<ul class="checklist">
+<li>Sabes de memoria las 3 rotaciones y sus permanencias (CxC, Inventarios, Proveedores).</li>
+<li>Sabes armar el ciclo de maduración y el ciclo de caja sin mirar el formulario.</li>
+<li>Sabes completar un estado de resultados desde Ingresos hasta Resultado Neto.</li>
+<li>Sabes la relación ROE = ROA × (1 + Índice de Endeudamiento) y la versión DuPont de 3 factores.</li>
+<li>Sabes diferenciar GAO (riesgo operativo, costos fijos) de GAF (riesgo financiero, deuda).</li>
+<li>Tienes tiempo: son 60 minutos para 20 puntos, no te quedes pegado en un solo ítem.</li>
+</ul>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="liquidez">
+<h2 class="section-title">2. Liquidez y capital de trabajo</h2>
+<div class="section-body">
+
+<h3>2.1 ¿Qué mide la liquidez?</h3>
+<p>La liquidez es la capacidad de la empresa de pagar sus obligaciones de <strong>corto plazo</strong>
+(menos de 12 meses) con sus activos de corto plazo. Una empresa puede ser rentable en el papel
+y aun así quebrar si no tiene caja para pagar hoy.</p>
+
+<div class="formula">
+$$\text{Liquidez Corriente (LC)} = \frac{\text{Activo Corriente}}{\text{Pasivo Corriente}}$$
+$$\text{Prueba Ácida (PA)} = \frac{\text{Activo Corriente} - \text{Inventarios}}{\text{Pasivo Corriente}}$$
+$$\text{Liquidez Inmediata (LI)} = \frac{\text{Efectivo}}{\text{Pasivo Corriente}}$$
+$$KTN = \text{Activo Corriente} - \text{Pasivo Corriente}$$
+</div>
+
+<div class="intuicion">
+La Prueba Ácida excluye inventarios porque son el activo corriente <strong>menos líquido</strong>
+(hay que venderlos primero). El KTN no es una razón, es un <strong>monto en pesos</strong>: si es
+negativo, ni todo el activo corriente alcanza para cubrir el pasivo corriente.
+</div>
+
+<h3>2.2 Rotación y permanencia (la parte que más cae en el control)</h3>
+<p>La liquidez estática (LC, PA, LI) es una <strong>foto</strong>. Los indicadores de actividad son
+la <strong>película</strong>: miden qué tan rápido la empresa convierte inventario → venta → cobro,
+y cómo paga a sus proveedores.</p>
+
+<div class="formula">
+$$\text{Rot. CxC} = \frac{\text{Ventas}}{\text{Cuentas por Cobrar}} 
+\qquad
+\text{Rot. Inventarios} = \frac{\text{Costo de Ventas}}{\text{Inventarios}}
+\qquad
+\text{Rot. Proveedores} = \frac{\text{Costo de Ventas}}{\text{Proveedores}}$$
+
+$$\text{Permanencia} = \frac{360}{\text{Rotación}}$$
+</div>
+
+<div class="error">
+Ojo con el numerador: las cuentas por cobrar se comparan con <strong>Ventas</strong> (están a
+precio de venta), pero Inventarios y Proveedores se comparan con <strong>Costo de Ventas</strong>
+(están valorizados al costo). No mezcles Ventas con Inventarios: sobre-estimarías la rotación.
+La base de días puede ser 360 o 365 — el control 2 de este curso usa <strong>360 días</strong>,
+revisa siempre el enunciado.
+</div>
+
+<h3>2.3 Ciclo de maduración y ciclo de caja</h3>
+<div class="formula">
+$$\text{Ciclo de Maduración} = \text{Permanencia CxC} + \text{Permanencia Inventarios}$$
+$$\text{Ciclo de Caja} = \text{Ciclo de Maduración} - \text{Permanencia Proveedores}$$
+</div>
+
+<div class="flow">
+Compra insumos → <strong>Inventario</strong> ($t$ días) → Venta → <strong>Cuentas por Cobrar</strong> ($t$ días) → Efectivo<br>
+(en paralelo) Compra → <strong>Cuentas por Pagar</strong> ($t$ días de "financiamiento gratis")
+</div>
+
+<div class="intuicion">
+El ciclo de caja es el número de días en que la empresa tiene <strong>su propia plata
+inmovilizada</strong> en el proceso productivo-comercial, después de descontar el financiamiento
+que le regalan los proveedores. Si es positivo (lo normal), necesita capital de trabajo externo.
+Si fuera negativo (caso Walmart/supermercados grandes), son los proveedores quienes financian
+la operación: cobras antes de tener que pagar.
+</div>
+
+<h3>2.4 Ejemplo paso a paso (con números propios, distintos al control)</h3>
+<p>Una empresa de la industria textil presenta (cifras en miles de $):</p>
+<table>
+<tr><th>Activo corriente</th><th>Monto</th><th>Pasivo corriente</th><th>Monto</th></tr>
+<tr><td>Efectivo</td><td>3.600</td><td>Proveedores</td><td>5.400</td></tr>
+<tr><td>Cuentas por cobrar</td><td>6.000</td><td></td><td></td></tr>
+<tr><td>Inventarios</td><td>7.200</td><td></td><td></td></tr>
+</table>
+<p>Estado de resultados: Ventas = 9.600 ; Costo de ventas = 6.480. Promedios del sector:
+CxC 60 días, Inventarios 85 días, Proveedores 55 días.</p>
+
+<div class="paso"><span class="num">1</span><strong>Liquidez estática.</strong>
+$$AC = 3.600+6.000+7.200 = 16.800 \qquad PC = 5.400$$
+$$LC = \frac{16.800}{5.400}=3{,}11 \quad;\quad PA=\frac{16.800-7.200}{5.400}=1{,}78 \quad;\quad LI=\frac{3.600}{5.400}=0{,}67 \quad;\quad KTN=11.400$$
+</div>
+
+<div class="paso"><span class="num">2</span><strong>Rotaciones.</strong>
+$$\text{Rot CxC}=\frac{9.600}{6.000}=1{,}60 \quad;\quad \text{Rot Inv}=\frac{6.480}{7.200}=0{,}90 \quad;\quad \text{Rot Prov}=\frac{6.480}{5.400}=1{,}20$$
+</div>
+
+<div class="paso"><span class="num">3</span><strong>Permanencias (base 360).</strong>
+$$D_{CxC}=\frac{360}{1{,}60}=225 \text{ días} \quad;\quad D_{Inv}=\frac{360}{0{,}90}=400 \text{ días} \quad;\quad D_{Prov}=\frac{360}{1{,}20}=300 \text{ días}$$
+</div>
+
+<div class="paso"><span class="num">4</span><strong>Ciclos.</strong>
+$$\text{Ciclo Maduración}=225+400=625 \text{ días}$$
+$$\text{Ciclo Caja}=625-300=325 \text{ días}$$
+</div>
+
+<div class="paso"><span class="num">5</span><strong>Análisis vs. sector.</strong>
+La empresa cobra en 225 días frente a 60 del sector (cobranza muy deficiente); mantiene
+inventario 400 días frente a 85 (sobre-stock severo); y paga a proveedores en 300 días frente
+a 55 (probable atraso forzado por falta de caja, no por buena negociación). El ciclo de caja de
+325 días revela una necesidad crónica de financiamiento externo: el efectivo está atrapado casi
+un año en el ciclo operativo. Aunque la liquidez corriente (3,11) parece "buena", esa cifra es
+engañosa porque gran parte del activo corriente son inventarios y cuentas por cobrar de muy
+baja rotación, no efectivo disponible.
+</div>
+
+<div class="intuicion">
+Nota este punto clave, muy preguntado en la parte de análisis: una <strong>Liquidez Corriente
+alta no garantiza buena liquidez real</strong> si esos activos corrientes son "lentos" (permanencias
+largas). Por eso siempre hay que leer LC junto con las permanencias y el ciclo de caja.
+</div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="actividad">
+<h2 class="section-title">3. Solvencia y endeudamiento (complemento)</h2>
+<div class="section-body">
+<p>Aunque no siempre aparece explícito en el Control 2, la Guía de Ayudantía lo trae y conecta
+directamente con el ROE (sección siguiente), así que conviene dominarlo.</p>
+
+<div class="formula">
+$$\text{Índice de Solvencia} = \frac{\text{Activo Total}}{\text{Pasivo Total}}
+\qquad
+\text{Índice de Endeudamiento (IE)} = \frac{\text{Pasivo Total}}{\text{Patrimonio}}$$
+</div>
+
+<div class="intuicion">
+$IE=0$: la empresa no tiene deuda. $IE=1$: mitad deuda, mitad patrimonio. $IE \gg 1$: empresa
+muy apalancada — más riesgo, pero también mayor potencial de retorno para el dueño (por el
+efecto multiplicador que ves en la sección de ROE/DuPont).
+</div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="resultados">
+<h2 class="section-title">4. Estado de resultados y márgenes</h2>
+<div class="section-body">
+
+<h3>4.1 La estructura canónica</h3>
+<div class="formula">
+$$\text{Ingresos (Ventas)}$$
+$$-\ \text{Costo de Ventas / Costo de Servicios}$$
+$$=\ \text{Resultado Bruto}$$
+$$-\ \text{Gastos de Administración y Ventas}$$
+$$=\ \text{Resultado Operacional (EBIT)}$$
+$$-\ \text{Gastos Financieros / Intereses}$$
+$$=\ \text{Resultado Antes de Impuestos (EBT)}$$
+$$-\ \text{Impuesto a la Renta (tasa} \times \text{EBT)}$$
+$$=\ \text{Resultado Neto}$$
+</div>
+
+<div class="intuicion">
+Cada nivel de resultado responde una pregunta de negocio distinta: el <strong>bruto</strong> mide
+cuánto ganas después de producir/entregar el servicio; el <strong>operacional (EBIT)</strong>,
+cuánto ganas después de producir Y administrar el negocio; el <strong>neto</strong>, cuánto le
+queda al dueño después de pagar a los bancos (intereses) y al Estado (impuestos).
+</div>
+
+<div class="error">
+Si el EBT resulta <strong>negativo</strong>, en los ejercicios introductorios de este curso el
+impuesto del período se asume 0 (no se "gana" un crédito tributario). Revisa la pauta de la
+Sección 2: con EBT = -90, el impuesto calculado fue 0 y el resultado neto quedó igual a -90.
+</div>
+
+<h3>4.2 Márgenes</h3>
+<div class="formula">
+$$\text{Margen Bruto} = \frac{\text{Resultado Bruto}}{\text{Ingresos}}
+\qquad
+\text{Margen Operacional} = \frac{\text{EBIT}}{\text{Ingresos}}
+\qquad
+\text{Margen Neto} = \frac{\text{Resultado Neto}}{\text{Ingresos}}$$
+</div>
+
+<div class="intuicion">
+No compares márgenes entre sectores distintos sin cuidado: un supermercado puede vivir con
+margen neto de 2-4% porque rota mucho su inventario; una marca de lujo puede tener margen de
+30%+ vendiendo pocas unidades. Ambos modelos de negocio pueden llegar al mismo ROE por caminos
+distintos (esto se ve clarísimo en DuPont, sección 5).
+</div>
+
+<h3>4.3 Ejemplo paso a paso</h3>
+<p>Empresa de retail: Ingresos 12.500; Costo de ventas 8.300; Gastos adm. y ventas 2.450;
+Gastos financieros 380; tasa de impuesto 27% (cifras en millones).</p>
+
+<div class="paso"><span class="num">1</span>
+$$\text{Resultado Bruto} = 12.500-8.300=4.200$$
+</div>
+<div class="paso"><span class="num">2</span>
+$$\text{EBIT}=4.200-2.450=1.750$$
+</div>
+<div class="paso"><span class="num">3</span>
+$$\text{EBT}=1.750-380=1.370$$
+</div>
+<div class="paso"><span class="num">4</span>
+$$\text{Impuesto}=0{,}27\times1.370=369{,}9 \qquad \text{Resultado Neto}=1.370-369{,}9=1.000{,}1$$
+</div>
+<div class="paso"><span class="num">5</span> Márgenes:
+$$\text{M. Bruto}=\frac{4.200}{12.500}=33{,}6\% \quad \text{M. Operacional}=\frac{1.750}{12.500}=14\% \quad \text{M. Neto}=\frac{1.000{,}1}{12.500}=8{,}0\%$$
+</div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="rentabilidad">
+<h2 class="section-title">5. ROA, ROE y el modelo DuPont</h2>
+<div class="section-body">
+
+<div class="formula">
+$$ROA = \frac{\text{Resultado Neto}}{\text{Activo Total}}
+\qquad
+ROE = \frac{\text{Resultado Neto}}{\text{Patrimonio}}$$
+</div>
+
+<h3>5.1 La relación ROA–ROE (efecto apalancamiento)</h3>
+<div class="formula">
+$$ROE = ROA \times (1+IE)$$
+</div>
+<p><strong>Demostración corta:</strong></p>
+<div class="formula">
+$$ROE=\frac{UN}{Patrimonio}=\frac{UN}{Activo}\cdot\frac{Activo}{Patrimonio}=ROA\cdot\frac{Patrimonio+Pasivo}{Patrimonio}=ROA(1+IE)$$
+</div>
+
+<div class="intuicion">
+El factor $(1+IE)$ es el <strong>multiplicador de capital</strong>. Si $ROA=8\%$ y la empresa no
+tiene deuda ($IE=0$), $ROE=8\%$. Si se endeuda hasta $IE=2$ manteniendo el mismo ROA, entonces
+$ROE=8\%\times 3=24\%$. La deuda amplifica el retorno del dueño — pero también amplifica las
+pérdidas si el ROA fuera negativo. No es magia gratis, es riesgo trasladado al accionista.
+</div>
+
+<h3>5.2 Descomposición DuPont (3 factores)</h3>
+<div class="formula">
+$$ROE = \underbrace{\frac{\text{Resultado Neto}}{\text{Ventas}}}_{\text{Margen Neto}} \times
+\underbrace{\frac{\text{Ventas}}{\text{Activo Total}}}_{\text{Rotación de Activos}} \times
+\underbrace{\frac{\text{Activo Total}}{\text{Patrimonio}}}_{\text{Multiplicador de Capital}}$$
+</div>
+
+<div class="intuicion">
+DuPont responde: <em>¿la empresa gana por precio (margen), por volumen (rotación), o por
+deuda (apalancamiento)?</em> Una tienda de lujo gana por margen; un supermercado por rotación;
+un banco o una utility, por apalancamiento. Identificar la palanca dominante te permite comentar
+con criterio (no solo calcular) en la parte "d)" de la Pregunta 2 del control.
+</div>
+
+<h3>5.3 Ejemplo paso a paso</h3>
+<p>Siguiendo el ejemplo de la sección 4: Resultado Neto = 1.000,1; Ingresos = 12.500. Supongamos
+Activo Total = 9.000 y Patrimonio = 6.200 (millones).</p>
+
+<div class="paso"><span class="num">1</span>
+$$ROA=\frac{1.000{,}1}{9.000}=11{,}1\% \qquad ROE=\frac{1.000{,}1}{6.200}=16{,}1\%$$
+</div>
+<div class="paso"><span class="num">2</span> DuPont:
+$$\text{Margen Neto}=\frac{1.000{,}1}{12.500}=8{,}0\% \qquad \text{Rot. Activos}=\frac{12.500}{9.000}=1{,}39 \qquad \text{Mult. Capital}=\frac{9.000}{6.200}=1{,}45$$
+</div>
+<div class="paso"><span class="num">3</span> Verificación:
+$$ROE_{DuPont}=8{,}0\%\times1{,}39\times1{,}45=16{,}1\% \quad \checkmark$$
+</div>
+<div class="paso"><span class="num">4</span> <strong>Interpretación:</strong> el ROE de 16,1% se explica principalmente por un margen
+neto sólido (8%) combinado con una rotación de activos razonable (1,39 veces) y un
+apalancamiento moderado (1,45). No es una empresa que dependa fuertemente de deuda para
+generar retorno a sus dueños.
+</div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="apalancamiento">
+<h2 class="section-title">6. Apalancamiento operativo y financiero</h2>
+<div class="section-body">
+
+<h3>6.1 Definiciones "de sensibilidad" (las que da la Ayudantía Extra)</h3>
+<div class="formula">
+$$GAO = \frac{\%\Delta EBIT}{\%\Delta Ventas}
+\qquad
+GAF = \frac{\%\Delta \text{Utilidad Neta}}{\%\Delta EBIT}
+\qquad
+GAT = GAO \times GAF = \frac{\%\Delta \text{Utilidad Neta}}{\%\Delta Ventas}$$
+</div>
+
+<h3>6.2 Versión "contable" (la que se usa cuando no dan variaciones %, sino el estado de resultados)</h3>
+<div class="formula">
+$$GAO \approx \frac{\text{Margen de Contribución (Resultado Bruto)}}{\text{EBIT}}
+\qquad
+GAF \approx \frac{\text{EBIT}}{\text{EBT}}$$
+</div>
+
+<div class="intuicion">
+Ambas versiones son consistentes: si no tienes variaciones porcentuales explícitas, se aproxima
+el margen de contribución con el Resultado Bruto (asumiendo Costo de Ventas = variable y
+Gastos Adm. = fijo), tal como lo hace la pauta de la Sección 1. Si el enunciado te da los
+<strong>cambios porcentuales</strong> directamente (como en el Ejercicio 4 de la Ayudantía
+Extra), usa la primera fórmula: es más directa y no requiere supuestos sobre qué costo es fijo
+o variable.
+</div>
+
+<div class="error">
+No confundas <strong>GAO</strong> (mide cuánto se amplifica el EBIT ante cambios en Ventas —
+riesgo <em>operativo</em>, por estructura de costos fijos) con <strong>GAF</strong> (mide cuánto
+se amplifica la Utilidad Neta ante cambios en el EBIT — riesgo <em>financiero</em>, por la carga
+de intereses de la deuda). Son dos fuentes de riesgo distintas y se analizan por separado antes
+de combinarlas en el GAT.
+</div>
+
+<h3>6.3 Ejemplo paso a paso — método de variaciones %</h3>
+<p>Una empresa reporta: Ventas +12%, EBIT +18%, Utilidad Neta +50%.</p>
+<div class="paso"><span class="num">1</span>
+$$GAO=\frac{18\%}{12\%}=1{,}50$$
+</div>
+<div class="paso"><span class="num">2</span>
+$$GAF=\frac{50\%}{18\%}=2{,}78$$
+</div>
+<div class="paso"><span class="num">3</span>
+$$GAT=1{,}50\times2{,}78=4{,}17$$
+</div>
+<div class="paso"><span class="num">4</span><strong>Interpretación:</strong> por cada 1% que suban las ventas, el EBIT sube 1,5% (riesgo
+operativo moderado). Por cada 1% que suba el EBIT, la utilidad neta sube 2,78% (riesgo
+financiero alto, probablemente por una carga de intereses relevante frente al EBIT). En
+conjunto, una caída de 10% en ventas podría gatillar una caída de ~42% en la utilidad neta:
+la estructura combinada de costos fijos y deuda es riesgosa.
+</div>
+
+<h3>6.4 Ejemplo paso a paso — método contable (desde el estado de resultados)</h3>
+<p>Usando el ejemplo de la sección 4: Resultado Bruto 4.200; EBIT 1.750; EBT 1.370.</p>
+<div class="paso"><span class="num">1</span>
+$$GAO=\frac{4.200}{1.750}=2{,}40$$
+</div>
+<div class="paso"><span class="num">2</span>
+$$GAF=\frac{1.750}{1.370}=1{,}28$$
+</div>
+<div class="paso"><span class="num">3</span>
+$$GAT=2{,}40\times1{,}28=3{,}07$$
+</div>
+<div class="paso"><span class="num">4</span><strong>Interpretación:</strong> riesgo operativo moderado-alto (GAO 2,4, ligado al peso de los
+gastos de administración fijos); riesgo financiero bajo-moderado (GAF 1,28, los intereses son
+pequeños frente al EBIT). El riesgo total (GAT 3,07) es manejable: una caída de 10% en ventas
+implicaría una caída de aproximadamente 30% en el resultado neto.
+</div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="formulario">
+<h2 class="section-title">7. Formulario resumen (para memorizar)</h2>
+<div class="section-body">
+
+<table class="formulario-final">
+<tr><td>Liquidez Corriente</td><td>$AC / PC$</td></tr>
+<tr><td>Prueba Ácida</td><td>$(AC - Inv) / PC$</td></tr>
+<tr><td>Liquidez Inmediata</td><td>$Efectivo / PC$</td></tr>
+<tr><td>KTN</td><td>$AC - PC$</td></tr>
+<tr><td>Rotación CxC</td><td>$Ventas / CxC$</td></tr>
+<tr><td>Rotación Inventarios</td><td>$CV / Inv$</td></tr>
+<tr><td>Rotación Proveedores</td><td>$CV / Prov$</td></tr>
+<tr><td>Permanencia</td><td>$360 / \text{Rotación}$</td></tr>
+<tr><td>Ciclo de Maduración</td><td>$D_{CxC} + D_{Inv}$</td></tr>
+<tr><td>Ciclo de Caja</td><td>$\text{Ciclo Mad.} - D_{Prov}$</td></tr>
+<tr><td>Índice de Solvencia</td><td>$Activo / Pasivo$</td></tr>
+<tr><td>Índice de Endeudamiento (IE)</td><td>$Pasivo / Patrimonio$</td></tr>
+<tr><td>Margen Bruto / Operacional / Neto</td><td>$RB, EBIT, RN$ sobre $Ventas$</td></tr>
+<tr><td>ROA</td><td>$RN / Activo$</td></tr>
+<tr><td>ROE</td><td>$RN / Patrimonio = ROA(1+IE)$</td></tr>
+<tr><td>DuPont (3 factores)</td><td>$\text{Margen Neto} \times \text{Rot. Activos} \times \text{Mult. Capital}$</td></tr>
+<tr><td>GAO</td><td>$\%\Delta EBIT / \%\Delta Ventas \ \approx\ RB/EBIT$</td></tr>
+<tr><td>GAF</td><td>$\%\Delta UN / \%\Delta EBIT \ \approx\ EBIT/EBT$</td></tr>
+<tr><td>GAT</td><td>$GAO \times GAF$</td></tr>
+</table>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="ejercicios">
+<h2 class="section-title">8. Ejercicios extra de práctica</h2>
+<div class="section-body">
+
+<div class="ejercicio">
+<h4>Ejercicio A — Liquidez y ciclos <span class="badge">Nivel: control</span></h4>
+<p>Una empresa vitivinícola presenta (miles de $): Efectivo 4.100, Cuentas por cobrar 7.800,
+Inventarios 10.200, Proveedores 6.900, Ventas 13.400, Costo de ventas 8.900. El sector opera
+en promedio con: CxC 65 días, Inventarios 110 días, Proveedores 58 días.</p>
+<p>Calcule: (a) las 3 rotaciones; (b) las permanencias (base 360); (c) el ciclo de maduración
+y el ciclo de caja; (d) compare con el sector y concluya sobre la liquidez.</p>
+<details class="solucion">
+<summary>Ver solución</summary>
+<p>
+Rot. CxC $=13.400/7.800=1{,}72$ ; Rot. Inv $=8.900/10.200=0{,}87$ ; Rot. Prov $=8.900/6.900=1{,}29$.<br>
+$D_{CxC}=360/1{,}72=209{,}3$ días ; $D_{Inv}=360/0{,}87=413{,}8$ días ; $D_{Prov}=360/1{,}29=279{,}1$ días.<br>
+Ciclo de Maduración $=209{,}3+413{,}8=623{,}1$ días. Ciclo de Caja $=623{,}1-279{,}1=344{,}0$ días.<br>
+Frente al sector (65, 110, 58 días), la empresa cobra y mantiene inventario muchísimo más
+lento que el promedio de la industria, y aunque también paga más lento a proveedores, eso no
+compensa: el ciclo de caja de 344 días implica una necesidad de financiamiento de capital de
+trabajo muy superior a la de un competidor típico del sector.
+</p>
+</details>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio B — Estado de resultados, márgenes, ROA/ROE/DuPont <span class="badge">Nivel: control</span></h4>
+<p>Empresa de tecnología (millones de $): Ingresos 6.200; Costo de ventas 3.100; Gastos de
+administración y ventas 1.450; Gastos financieros 210; tasa de impuesto 27%. Activo total
+8.500; Patrimonio 6.000.</p>
+<p>Complete el estado de resultados, calcule los tres márgenes, ROA, ROE y verifique con DuPont.</p>
+<details class="solucion">
+<summary>Ver solución</summary>
+<p>
+RB $=6.200-3.100=3.100$. EBIT $=3.100-1.450=1.650$. EBT $=1.650-210=1.440$.
+Impuesto $=0{,}27\times1.440=388{,}8$. Resultado Neto $=1.440-388{,}8=1.051{,}2$.<br>
+Margen Bruto $=50{,}0\%$ ; Margen Operacional $=26{,}6\%$ ; Margen Neto $=17{,}0\%$.<br>
+$ROA=1.051{,}2/8.500=12{,}4\%$ ; $ROE=1.051{,}2/6.000=17{,}5\%$.<br>
+DuPont: Margen Neto $17{,}0\%$ × Rotación de Activos $(6.200/8.500=0{,}73)$ × Multiplicador de
+Capital $(8.500/6.000=1{,}42)$ $=17{,}0\%\times0{,}73\times1{,}42=17{,}6\%$ (coincide con ROE,
+salvo redondeo). El ROE está impulsado principalmente por el margen neto alto, típico de una
+empresa tecnológica con baja rotación de activos.
+</p>
+</details>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio C — Apalancamiento operativo y financiero <span class="badge">Nivel: control</span></h4>
+<p>Con los datos del Ejercicio B, calcule GAO y GAF usando el método contable, y evalúe el
+riesgo. Adicionalmente, si se sabe que ante un aumento de 15% en las ventas el EBIT sube 22%,
+calcule el GAO por el método de variaciones porcentuales y compare.</p>
+<details class="solucion">
+<summary>Ver solución</summary>
+<p>
+Método contable: $GAO=RB/EBIT=3.100/1.650=1{,}88$. $GAF=EBIT/EBT=1.650/1.440=1{,}15$.
+$GAT=1{,}88\times1{,}15=2{,}16$.<br>
+Método de variaciones: $GAO=22\%/15\%=1{,}47$.<br>
+Ambos métodos son aproximaciones distintas y pueden no coincidir exactamente (el método
+contable asume que todo el costo de ventas es variable y todo el gasto de administración es
+fijo, supuesto que puede no cumplirse exactamente en la realidad). El riesgo operativo es
+moderado y el riesgo financiero es bajo, dado que los gastos financieros (210) son pequeños
+frente al EBIT (1.650).
+</p>
+</details>
+</div>
+
+<div class="ejercicio">
+<h4>Ejercicio D — Integrador <span class="badge">Nivel: exigente</span></h4>
+<p>Una empresa agroexportadora tiene: Ventas 18.500; Costo de ventas 12.950; Gastos de
+administración y ventas 2.800; Gastos financieros 1.100; tasa de impuesto 27%; Activo total
+21.000; Patrimonio 9.500; Efectivo 2.200; CxC 5.100; Inventarios 6.400; Proveedores 4.300.
+El sector opera con permanencias de 55 (CxC), 95 (Inventarios) y 50 (Proveedores) días.</p>
+<p>Resuelva íntegramente: liquidez, rotaciones y ciclos; estado de resultados y márgenes;
+ROA, ROE y DuPont; GAO, GAF y GAT; y entregue una conclusión general sobre la salud financiera
+de la empresa.</p>
+<details class="solucion">
+<summary>Ver solución</summary>
+<p>
+<strong>Liquidez:</strong> $AC=2.200+5.100+6.400=13.700$. $LC=13.700/4.300=3{,}19$.
+$PA=(13.700-6.400)/4.300=1{,}70$. $LI=2.200/4.300=0{,}51$. $KTN=9.400$.<br>
+<strong>Rotaciones/ciclos:</strong> Rot. CxC $=18.500/5.100=3{,}63$ → $D_{CxC}=360/3{,}63=99{,}2$ días.
+Rot. Inv $=12.950/6.400=2{,}02$ → $D_{Inv}=360/2{,}02=178{,}2$ días.
+Rot. Prov $=12.950/4.300=3{,}01$ → $D_{Prov}=360/3{,}01=119{,}6$ días.
+Ciclo Maduración $=99{,}2+178{,}2=277{,}4$ días. Ciclo Caja $=277{,}4-119{,}6=157{,}8$ días.
+Comparado con el sector (55, 95, 50), la empresa está por sobre el promedio en las tres
+permanencias: cobra más lento, mantiene más inventario y paga más lento — el ciclo de caja del
+sector sería $55+95-50=100$ días, bastante menor a los 157,8 días de la empresa.<br>
+<strong>Estado de resultados:</strong> RB $=18.500-12.950=5.550$. EBIT $=5.550-2.800=2.750$.
+EBT $=2.750-1.100=1.650$. Impuesto $=0{,}27\times1.650=445{,}5$. Resultado Neto $=1.204{,}5$.<br>
+Márgenes: Bruto $30{,}0\%$ ; Operacional $14{,}9\%$ ; Neto $6{,}5\%$.<br>
+<strong>ROA/ROE/DuPont:</strong> $ROA=1.204{,}5/21.000=5{,}7\%$. $ROE=1.204{,}5/9.500=12{,}7\%$.
+DuPont: Margen Neto $6{,}5\%$ × Rotación de Activos $(18.500/21.000=0{,}88)$ × Multiplicador
+de Capital $(21.000/9.500=2{,}21)$ $\approx 12{,}7\%$. El ROE se ve impulsado principalmente
+por el apalancamiento financiero (multiplicador 2,21), ya que el margen neto y la rotación de
+activos son moderados.<br>
+<strong>GAO/GAF/GAT:</strong> $GAO=5.550/2.750=2{,}02$. $GAF=2.750/1.650=1{,}67$.
+$GAT=2{,}02\times1{,}67=3{,}37$.<br>
+<strong>Conclusión general:</strong> la empresa exhibe un ciclo de caja más largo que el sector
+(mayor necesidad de capital de trabajo), rentabilidad neta modesta apalancada principalmente
+por deuda, y un riesgo combinado (GAT 3,37) que la hace sensible a caídas de ventas: una baja
+de 10% en ventas podría reducir la utilidad neta en aproximadamente 34%.
+</p>
+</details>
+</div>
+
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="conceptuales">
+<h2 class="section-title">9. Preguntas conceptuales típicas (Parte teórica)</h2>
+<div class="section-body">
+
+<div class="ejercicio">
+<h4>1. ¿Puede una empresa ser líquida pero poco rentable?</h4>
+<details class="solucion"><summary>Ver respuesta guía</summary>
+<p>Sí. La liquidez mide si la empresa puede pagar sus obligaciones de corto plazo, no si genera
+utilidades. Una empresa puede tener mucho efectivo o activos corrientes (por ejemplo, por baja
+reinversión o exceso de caja ociosa) y aun así tener márgenes y ROA/ROE bajos porque su negocio
+no es eficiente generando retornos sobre esos recursos.</p>
+</details>
+</div>
+
+<div class="ejercicio">
+<h4>2. ¿Qué implica para una empresa tener un ciclo de caja negativo?</h4>
+<details class="solucion"><summary>Ver respuesta guía</summary>
+<p>Implica que la empresa cobra a sus clientes antes de tener que pagar a sus proveedores: son
+los proveedores quienes financian la operación. Es una posición muy favorable de capital de
+trabajo, típica de negocios con alto poder de negociación y ventas al contado (grandes cadenas
+de retail o supermercados).</p>
+</details>
+</div>
+
+<div class="ejercicio">
+<h4>3. ¿Por qué un ROE alto no siempre implica una empresa sana financieramente?</h4>
+<details class="solucion"><summary>Ver respuesta guía</summary>
+<p>Porque el ROE puede estar "inflado" por un alto apalancamiento financiero (multiplicador de
+capital elevado) más que por una operación realmente rentable (margen y rotación). Según
+$ROE=ROA(1+IE)$, una empresa con ROA bajo pero muy endeudada puede mostrar un ROE atractivo,
+mientras acumula un riesgo financiero considerable (reflejado en un GAF alto).</p>
+</details>
+</div>
+
+<div class="ejercicio">
+<h4>4. ¿Qué relación existe entre endeudamiento, apalancamiento y riesgo?</h4>
+<details class="solucion"><summary>Ver respuesta guía</summary>
+<p>A mayor endeudamiento (mayor IE), mayor apalancamiento financiero (mayor multiplicador de
+capital y mayor GAF), lo que amplifica tanto las ganancias como las pérdidas de los
+accionistas ante variaciones del resultado operacional. El endeudamiento no es "malo" per se
+— puede aumentar el ROE — pero incrementa la volatilidad de la utilidad neta y el riesgo de
+insolvencia si el EBIT cae por debajo de los gastos financieros.</p>
+</details>
+</div>
+
+</div>
+</section>
+
+<footer>
+Guía elaborada a partir de las pautas del Control 2 (Secciones 1 y 2), la Guía de Ayudantía y
+la Ayudantía Extra de Finanzas I. Úsala como complemento, no como reemplazo del estudio de los
+apuntes de clase.
+</footer>
+
+</div>
+</body>
+</html>

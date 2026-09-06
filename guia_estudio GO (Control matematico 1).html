@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de Estudio — Gestión de Operaciones</title>
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ffffff;
+    --paper-line:#ded6bd;
+    --ink:#211d17;
+    --navy:#1f3a5f;
+    --navy-deep:#152a45;
+    --red:#a3271a;
+    --red-soft:#f1e0dc;
+    --muted:#68625a;
+    --card:#fefefe;
+    --border:#e5e1d4;
+    --code-bg:#f1efe6;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Inter", sans-serif;
+    line-height:1.65;
+    font-size:16px;
+  }
+  h1,h2,h3,h4{
+    font-family:"Lora", serif;
+    color:var(--navy-deep);
+    line-height:1.25;
+    font-weight:700;
+  }
+  a{color:var(--red);}
+  .layout{
+    display:grid;
+    grid-template-columns: 270px minmax(0,1fr);
+    max-width:1180px;
+    margin:0 auto;
+  }
+  /* ---------- Sidebar ---------- */
+  nav.toc{
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100vh;
+    overflow-y:auto;
+    padding:2rem 1.25rem 2rem 1.5rem;
+    border-right:1px solid var(--border);
+    background:#ffffff;
+  }
+  nav.toc .brand{
+    font-family:"Lora", serif;
+    font-weight:700;
+    font-size:1.05rem;
+    color:var(--navy-deep);
+    margin-bottom:0.15rem;
+  }
+  nav.toc .brand span{color:var(--red);}
+  nav.toc .subbrand{
+    font-size:0.78rem;
+    color:var(--muted);
+    margin-bottom:1.5rem;
+    display:block;
+  }
+  nav.toc ul{list-style:none;margin:0;padding:0;}
+  nav.toc .toc-part{
+    font-size:0.72rem;
+    letter-spacing:0.02em;
+    color:var(--red);
+    font-weight:600;
+    margin:1.35rem 0 0.5rem;
+  }
+  nav.toc .toc-part:first-of-type{margin-top:0;}
+  nav.toc li a{
+    display:block;
+    text-decoration:none;
+    color:var(--ink);
+    font-size:0.87rem;
+    padding:0.28rem 0 0.28rem 0.7rem;
+    border-left:2px solid transparent;
+  }
+  nav.toc li a:hover{border-left:2px solid var(--red);color:var(--red);}
+
+  /* ---------- Main content ---------- */
+  main{padding:3rem 3.2rem 6rem;max-width:760px;}
+  header.hero{
+    margin-bottom:2.75rem;
+    padding-bottom:1.5rem;
+    border-bottom:3px solid var(--navy);
+  }
+  header.hero .kicker{
+    font-size:0.82rem;
+    color:var(--red);
+    font-weight:600;
+    margin-bottom:0.4rem;
+  }
+  header.hero h1{font-size:2.15rem;margin:0 0 0.6rem;}
+  header.hero p{color:var(--muted);font-size:1.02rem;margin:0;max-width:60ch;}
+
+  section.part-intro{margin:3.5rem 0 1.75rem;}
+  section.part-intro h2{
+    font-size:1.65rem;
+    display:flex;
+    align-items:baseline;
+    gap:0.6rem;
+  }
+  section.part-intro h2 .tag{
+    font-family:"JetBrains Mono", monospace;
+    font-size:0.78rem;
+    color:#fff;
+    background:var(--navy);
+    padding:0.15rem 0.5rem;
+    border-radius:3px;
+  }
+  section.part-intro p{color:var(--muted);}
+
+  article.topic{margin:2.6rem 0;}
+  article.topic h3{
+    font-size:1.28rem;
+    margin-bottom:0.5rem;
+    padding-bottom:0.35rem;
+    border-bottom:1px solid var(--border);
+  }
+  article.topic h4{
+    font-size:1.02rem;
+    color:var(--navy);
+    margin:1.4rem 0 0.5rem;
+  }
+  p{margin:0.75rem 0;}
+  ul, ol{padding-left:1.35rem;}
+  li{margin:0.3rem 0;}
+
+  .formula-box{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-left:4px solid var(--navy);
+    border-radius:4px;
+    padding:1rem 1.25rem;
+    margin:1rem 0;
+    overflow-x:auto;
+  }
+  .formula-box .label{
+    font-family:"JetBrains Mono", monospace;
+    font-size:0.72rem;
+    color:var(--navy);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    display:block;
+    margin-bottom:0.4rem;
+  }
+
+  .note{
+    background:#eef2ec;
+    border:1px solid #cfdac6;
+    border-radius:4px;
+    padding:0.9rem 1.1rem;
+    font-size:0.93rem;
+    margin:1rem 0;
+  }
+  .note strong{color:#3a5a34;}
+
+  .warn{
+    background:#fbeeea;
+    border:1px solid #f0c9bd;
+    border-radius:4px;
+    padding:0.9rem 1.1rem;
+    font-size:0.93rem;
+    margin:1rem 0;
+  }
+  .warn strong{color:var(--red);}
+
+  .example{
+    margin:1.4rem 0;
+    border:1px solid var(--border);
+    border-radius:6px;
+    overflow:hidden;
+    background:var(--card);
+  }
+  .example .ex-head{
+    background:var(--navy-deep);
+    color:#f4efe1;
+    padding:0.55rem 1.1rem;
+    font-family:"JetBrains Mono", monospace;
+    font-size:0.8rem;
+    letter-spacing:0.02em;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .example .ex-head .src{
+    background:var(--red);
+    padding:0.1rem 0.5rem;
+    border-radius:3px;
+    font-size:0.7rem;
+  }
+  .example .ex-body{padding:1.1rem 1.3rem;}
+  .example .ex-body p:first-child{margin-top:0;}
+
+  .step{
+    display:grid;
+    grid-template-columns: 1.9rem 1fr;
+    gap:0.6rem;
+    margin:0.85rem 0;
+    align-items:start;
+  }
+  .step .num{
+    background:var(--red);
+    color:#fff;
+    width:1.9rem;
+    height:1.9rem;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:0.82rem;
+    font-weight:600;
+    font-family:"JetBrains Mono", monospace;
+    flex-shrink:0;
+  }
+  .step .content{padding-top:0.1rem;}
+  .step .content > *:first-child{margin-top:0;}
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:0.9rem 0;
+    font-size:0.9rem;
+  }
+  th, td{
+    border:1px solid var(--border);
+    padding:0.5rem 0.7rem;
+    text-align:center;
+  }
+  th{background:var(--red-soft);color:var(--navy-deep);font-weight:600;}
+  td.rowlabel, th.rowlabel{text-align:left;background:#f1ecdd;font-weight:600;}
+  tr:nth-child(even) td{background:#fbf9f2;}
+
+  .result{
+    display:inline-block;
+    background:#fff;
+    border:1.5px solid var(--red);
+    border-radius:4px;
+    padding:0.15rem 0.55rem;
+    font-family:"JetBrains Mono", monospace;
+    font-weight:600;
+    color:var(--red);
+  }
+
+  .matrix-box{
+    overflow-x:auto;
+  }
+
+  footer.doc-footer{
+    margin-top:4rem;
+    padding-top:1.5rem;
+    border-top:1px solid var(--border);
+    color:var(--muted);
+    font-size:0.85rem;
+  }
+
+  code{font-family:"JetBrains Mono", monospace;background:var(--code-bg);padding:0.1rem 0.35rem;border-radius:3px;font-size:0.85em;}
+
+  @media (max-width: 900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{position:relative;height:auto;border-right:none;border-bottom:1px solid var(--border);}
+    main{padding:2rem 1.3rem 4rem;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<nav class="toc">
+  <div class="brand">Guía UDP <span>·</span> Gestión de Operaciones</div>
+  <span class="subbrand">Productividad, Pronósticos y Holt-Winters</span>
+  <ul>
+    <li class="toc-part">Parte I — Productividad</li>
+    <li><a href="#p1-concepto">¿Qué es productividad?</a></li>
+    <li><a href="#p1-simple">Productividad de un solo factor</a></li>
+    <li><a href="#p1-multi">Productividad multifactorial</a></li>
+    <li><a href="#p1-cambio">Cambio porcentual</a></li>
+    <li><a href="#p1-eficacia">Rotación y días promedio</a></li>
+
+    <li class="toc-part">Parte II — Pronósticos</li>
+    <li><a href="#p2-concepto">Conceptos y tipos de demanda</a></li>
+    <li><a href="#p2-pms">Promedio móvil simple</a></li>
+    <li><a href="#p2-pmp">Promedio móvil ponderado</a></li>
+    <li><a href="#p2-ses">Suavización exponencial simple</a></li>
+    <li><a href="#p2-errores">Métricas de error</a></li>
+    <li><a href="#p2-holt">Doble suavización (Holt)</a></li>
+
+    <li class="toc-part">Parte III — Holt-Winters</li>
+    <li><a href="#p3-concepto">Estacionalidad: aditiva vs. multiplicativa</a></li>
+    <li><a href="#p3-sintendencia">HW sin tendencia (aditivo)</a></li>
+    <li><a href="#p3-contendencia">HW con tendencia</a></li>
+    <li><a href="#p3-matriz">¿Qué modelo usar?</a></li>
+
+    <li class="toc-part">Cierre</li>
+    <li><a href="#tips">Cómo enfrentar la prueba</a></li>
+  </ul>
+</nav>
+
+<main>
+  <header class="hero">
+    <div class="kicker">Facultad de Administración y Economía — Escuela de Ingeniería Comercial</div>
+    <h1>Guía de estudio: Productividad y Pronósticos</h1>
+    <p>Explicación paso a paso de cada método pedido en las Guías de Ejercicios I y II, con la teoría detrás de cada fórmula y un ejemplo completamente resuelto por técnica —basado en tus propios enunciados— para que puedas replicar el procedimiento en el resto de los ejercicios.</p>
+  </header>
+
+  <!-- ======================= PARTE I ======================= -->
+  <section class="part-intro" id="parte1">
+    <h2><span class="tag">Parte I</span> Productividad y Operaciones</h2>
+    <p>Corresponde a la sección A y B de tu <em>Guía de Ejercicios I</em> (ejercicios 1 a 20).</p>
+  </section>
+
+  <article class="topic" id="p1-concepto">
+    <h3>1. ¿Qué es la productividad?</h3>
+    <p>La productividad mide qué tan bien una organización transforma sus <strong>recursos (insumos)</strong> en <strong>bienes y servicios (salidas)</strong>. No mide cuánto se produce en términos absolutos, sino qué tan eficientemente se produce en relación con lo que se gastó para lograrlo.</p>
+    <div class="formula-box">
+      <span class="label">Idea central</span>
+      \[ \text{Productividad} = \frac{\text{Unidades producidas (salida)}}{\text{Insumos utilizados (entrada)}} \]
+    </div>
+    <p>Mejorar la productividad significa producir <em>más con lo mismo</em>, o <em>lo mismo con menos</em>. Existen tres formas de calcularla, según cuántos insumos consideres a la vez:</p>
+    <ul>
+      <li><strong>Productividad de un solo factor:</strong> relaciona la salida con un único insumo (horas-hombre, horas-máquina, materiales, etc.).</li>
+      <li><strong>Productividad multifactorial:</strong> relaciona la salida con varios insumos combinados (mano de obra + capital + materiales + energía).</li>
+      <li><strong>Productividad total:</strong> caso particular de la multifactorial donde se valorizan todos los insumos en dinero, para poder sumarlos.</li>
+    </ul>
+  </article>
+
+  <article class="topic" id="p1-simple">
+    <h3>2. Productividad de un solo factor</h3>
+    <div class="formula-box">
+      <span class="label">Fórmula</span>
+      \[ \text{Productividad} = \frac{\text{Unidades producidas}}{\text{Insumo (horas, trabajadores, etc.)}} \]
+    </div>
+    <p>Este es el cálculo que necesitas para los ejercicios 1, 2, 5, 8, 9 y 10 de tu guía.</p>
+
+    <div class="example">
+      <div class="ex-head"><span>Ejemplo resuelto</span><span class="src">Ejercicio 1 — Chuck Sox</span></div>
+      <div class="ex-body">
+        <p><strong>Datos:</strong> Chuck y sus 3 empleados (4 personas) trabajan un total de 40 horas al día y fabrican 120 cajas.</p>
+
+        <div class="step"><div class="num">a</div><div class="content">
+          <p><strong>Productividad actual</strong></p>
+          \[ \text{Productividad} = \frac{120 \text{ cajas}}{40 \text{ horas}} = \mathbf{3\ \text{cajas/hora}} \]
+        </div></div>
+
+        <div class="step"><div class="num">b</div><div class="content">
+          <p><strong>Nueva productividad</strong> si logran producir 125 cajas en las mismas 40 horas:</p>
+          \[ \text{Productividad}_{\text{nueva}} = \frac{125}{40} = \mathbf{3{,}125\ \text{cajas/hora}} \]
+        </div></div>
+
+        <div class="step"><div class="num">c</div><div class="content">
+          <p><strong>Aumento unitario</strong> = productividad nueva − productividad anterior:</p>
+          \[ 3{,}125 - 3{,}00 = \mathbf{0{,}125\ \text{cajas/hora}} \]
+        </div></div>
+
+        <div class="step"><div class="num">d</div><div class="content">
+          <p><strong>Cambio porcentual</strong> = aumento unitario dividido por la productividad anterior:</p>
+          \[ \frac{0{,}125}{3{,}00}\times 100 = \mathbf{4{,}17\%} \]
+        </div></div>
+
+        <div class="note"><strong>Cómo replicarlo:</strong> siempre identifica primero qué es "salida" (unidades, cajas, mantenimientos, ventas) y qué es "insumo" (horas totales del equipo, no por persona, salvo que el enunciado pida productividad "por trabajador"). Los ejercicios 2, 8, 9 y 10 son variaciones exactas de este mismo esquema: calculas la razón salida/insumo en dos momentos y comparas.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="topic" id="p1-multi">
+    <h3>3. Productividad multifactorial y productividad total</h3>
+    <p>Cuando hay más de un insumo relevante (mano de obra, materiales, energía, capital), no puedes sumarlos directamente si están en unidades distintas (horas, kilos, dólares). La solución es <strong>valorizar todo en la misma unidad</strong>, normalmente dinero, y sumar.</p>
+    <div class="formula-box">
+      <span class="label">Productividad total</span>
+      \[ \text{Productividad total} = \frac{\text{Salida (valor monetario)}}{\text{Mano de obra} + \text{Materiales} + \text{Energía} + \text{Capital} + \text{Otros}} \]
+    </div>
+    <div class="formula-box">
+      <span class="label">Productividad parcial (de un insumo específico)</span>
+      \[ \text{Productividad parcial}_i = \frac{\text{Salida (valor monetario)}}{\text{Insumo}_i} \]
+    </div>
+
+    <div class="example">
+      <div class="ex-head"><span>Ejemplo resuelto</span><span class="src">Ejercicio 4</span></div>
+      <div class="ex-body">
+        <p><strong>Datos:</strong></p>
+        <table>
+          <tr><th></th><th>Año anterior</th><th>Año actual</th></tr>
+          <tr><td class="rowlabel">Ventas (producto)</td><td>$2.000.000</td><td>$2.200.000</td></tr>
+          <tr><td class="rowlabel">Mano de obra</td><td>$30.000</td><td>$40.000</td></tr>
+          <tr><td class="rowlabel">Materias primas</td><td>$35.000</td><td>$45.000</td></tr>
+          <tr><td class="rowlabel">Energía</td><td>$5.000</td><td>$6.000</td></tr>
+          <tr><td class="rowlabel">Capital</td><td>$50.000</td><td>$50.000</td></tr>
+          <tr><td class="rowlabel">Otros</td><td>$2.000</td><td>$3.000</td></tr>
+        </table>
+
+        <div class="step"><div class="num">1</div><div class="content">
+          <p><strong>Suma de insumos totales</strong> de cada año:</p>
+          \[ \text{Insumos}_{\text{anterior}} = 30.000+35.000+5.000+50.000+2.000 = \mathbf{122.000} \]
+          \[ \text{Insumos}_{\text{actual}} = 40.000+45.000+6.000+50.000+3.000 = \mathbf{144.000} \]
+        </div></div>
+
+        <div class="step"><div class="num">2</div><div class="content">
+          <p><strong>Productividad total</strong> de cada año:</p>
+          \[ PT_{\text{anterior}} = \frac{2.000.000}{122.000} = \mathbf{16{,}39} \qquad PT_{\text{actual}} = \frac{2.200.000}{144.000} = \mathbf{15{,}28} \]
+        </div></div>
+
+        <div class="step"><div class="num">3</div><div class="content">
+          <p><strong>Productividades parciales</strong> (mismo procedimiento, cambiando el denominador):</p>
+          <table>
+            <tr><th></th><th>Mano de obra</th><th>Materias primas</th><th>Capital</th></tr>
+            <tr><td class="rowlabel">Año anterior</td><td>66,67</td><td>57,14</td><td>40,00</td></tr>
+            <tr><td class="rowlabel">Año actual</td><td>55,00</td><td>48,89</td><td>44,00</td></tr>
+          </table>
+        </div></div>
+
+        <div class="warn"><strong>Interpretación:</strong> la productividad total <em>cayó</em> de 16,39 a 15,28 (las ventas crecieron 10%, pero los insumos crecieron 18%). Al mirar las parciales, se ve que el deterioro viene de mano de obra y materias primas —cuyo gasto subió mucho más que las ventas—, mientras que el capital (que no varió) mejoró su productividad parcial. Esta lectura "qué insumo explica la caída" es exactamente lo que se te pide interpretar.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="topic" id="p1-cambio">
+    <h3>4. Cambio porcentual de productividad</h3>
+    <div class="formula-box">
+      <span class="label">Fórmula</span>
+      \[ \%\Delta \text{Productividad} = \frac{\text{Productividad}_{\text{nueva}} - \text{Productividad}_{\text{anterior}}}{\text{Productividad}_{\text{anterior}}} \times 100 \]
+    </div>
+    <p>Se usa igual sea productividad de un factor (ejercicios 6, 8) o de varios insumos valorizados (ejercicio 4). El truco de los ejercicios 5 y 6 —donde comparas dos pedidos o dos meses distintos— es calcular primero la productividad de <em>cada</em> escenario por separado y <strong>recién ahí</strong> compararlas; no mezcles los datos de ambos periodos en una sola fracción.</p>
+    <div class="note"><strong>Ejemplo rápido (estructura del ejercicio 5):</strong> Pedido Marina: 2.300 aparatos / (25 trab. × 2 sem. × 40 h) = 2.300/2.000 = 1,15 aparatos/hora. Pedido Ejército: 5.500 / (35×3×40) = 5.500/4.200 = 1,31 aparatos/hora. Como 1,31 > 1,15, el pedido del Ejército fue más productivo.</div>
+  </article>
+
+  <article class="topic" id="p1-eficacia">
+    <h3>5. Medidas de eficacia y eficiencia (rotaciones)</h3>
+    <p>Esta es la sección B de tu Guía I (ejercicios 11 a 20). Son razones financieras que miden qué tan rápido la empresa "hace circular" un activo. La lógica es siempre la misma: <strong>flujo del período dividido por el saldo promedio del activo.</strong></p>
+
+    <h4>Rotación de cuentas por cobrar</h4>
+    <div class="formula-box">
+      <span class="label">Fórmulas</span>
+      \[ \text{Rotación CxC} = \frac{\text{Ventas (a crédito)}}{\text{Cuentas por cobrar promedio}} \qquad \text{Días promedio de cobro} = \frac{360}{\text{Rotación CxC}} \]
+    </div>
+
+    <h4>Rotación de inventarios</h4>
+    <div class="formula-box">
+      <span class="label">Fórmulas</span>
+      \[ \text{Rotación de inventario} = \frac{\text{Costo de ventas}}{\text{Inventario promedio}} \qquad \text{Días en inventario} = \frac{360}{\text{Rotación de inventario}} \]
+    </div>
+    <div class="note">Nota la diferencia: cuentas por cobrar se divide por <strong>ventas</strong>; inventario se divide por <strong>costo de ventas</strong> (no por el precio de venta), porque el inventario está valorizado a costo.</div>
+
+    <h4>Rotación de activos totales</h4>
+    <div class="formula-box">
+      <span class="label">Fórmula</span>
+      \[ \text{Rotación de activos totales} = \frac{\text{Ventas}}{\text{Activos totales promedio}} \]
+    </div>
+
+    <div class="example">
+      <div class="ex-head"><span>Ejemplo resuelto</span><span class="src">Ejercicios 11 y 12</span></div>
+      <div class="ex-body">
+        <p><strong>Ej. 11 — TextiLana:</strong> ventas anuales $2.400.000, CxC promedio $200.000.</p>
+        \[ \text{Rotación} = \frac{2.400.000}{200.000} = \mathbf{12\ \text{veces}} \qquad \text{Días de cobro} = \frac{360}{12} = \mathbf{30\ \text{días}} \]
+        <p><strong>Ej. 12 — fabricante de autopartes:</strong> costo de ventas $1.800.000, inventario promedio $300.000.</p>
+        \[ \text{Rotación} = \frac{1.800.000}{300.000} = \mathbf{6\ \text{veces}} \qquad \text{Días en bodega} = \frac{360}{6} = \mathbf{60\ \text{días}} \]
+        <div class="note"><strong>Interpretación:</strong> la empresa cobra sus ventas a crédito, en promedio, cada 30 días —un ciclo de cobro razonable—, y su inventario permanece 60 días en bodega antes de venderse. Cuanto <em>mayor</em> la rotación (o <em>menor</em> el número de días), más eficiente es la empresa administrando ese activo. Los ejercicios 13 a 20 son la misma fórmula aplicada a distintos nombres de empresa: identifica si te dan ventas o costo de ventas, y si te piden veces o días.</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ======================= PARTE II ======================= -->
+  <section class="part-intro" id="parte2">
+    <h2><span class="tag">Parte II</span> Pronósticos de demanda</h2>
+    <p>Corresponde a la sección A de tu <em>Guía de Ejercicios II</em> (ejercicios 1 a 8): promedios móviles, suavización exponencial y doble suavización.</p>
+  </section>
+
+  <article class="topic" id="p2-concepto">
+    <h3>6. La lógica de todo pronóstico cuantitativo</h3>
+    <p>Todos los métodos de esta sección hacen lo mismo: usan datos históricos (\(A_t\), demanda real) para estimar un valor futuro (\(F_t\), pronóstico). La diferencia entre métodos es <strong>cuánto peso le dan a los datos más recientes versus los más antiguos</strong>, y si asumen que la demanda tiene tendencia y/o estacionalidad.</p>
+    <table>
+      <tr><th>Patrón de la demanda</th><th>Método recomendado</th></tr>
+      <tr><td class="rowlabel">Estable, sin tendencia</td><td>Promedio móvil / Suavización exponencial simple</td></tr>
+      <tr><td class="rowlabel">Con tendencia, sin estacionalidad</td><td>Doble suavización (Holt) / Regresión lineal</td></tr>
+      <tr><td class="rowlabel">Con estacionalidad, sin tendencia</td><td>Holt-Winters sin tendencia</td></tr>
+      <tr><td class="rowlabel">Con tendencia y estacionalidad</td><td>Holt-Winters con tendencia (aditivo o multiplicativo)</td></tr>
+    </table>
+  </article>
+
+  <article class="topic" id="p2-pms">
+    <h3>7. Promedio móvil simple (PMS)</h3>
+    <div class="formula-box">
+      <span class="label">Fórmula</span>
+      \[ F_t = \frac{A_{t-1}+A_{t-2}+\dots+A_{t-n}}{n} \]
+    </div>
+    <p>Toma el promedio aritmético de los últimos \(n\) períodos observados. Cada vez que avanzas un período, "sueltas" el dato más antiguo e incorporas el más reciente (por eso es "móvil").</p>
+
+    <div class="example">
+      <div class="ex-head"><span>Ejemplo resuelto</span><span class="src">Ejercicio 1 — ventas mensuales</span></div>
+      <div class="ex-body">
+        <p><strong>Datos:</strong> ventas meses 1 a 6: 150, 160, 165, 155, 170, 180. Promedio móvil de 3 períodos.</p>
+
+        <div class="step"><div class="num">a</div><div class="content">
+          <p>Calcula el pronóstico de cada mes usando los 3 anteriores:</p>
+          <table>
+            <tr><th>Mes</th><th>4</th><th>5</th><th>6</th><th>7 (pronóstico)</th></tr>
+            <tr><td class="rowlabel">Cálculo</td><td>(150+160+165)/3</td><td>(160+165+155)/3</td><td>(165+155+170)/3</td><td>(155+170+180)/3</td></tr>
+            <tr><td class="rowlabel">\(F_t\)</td><td>158,33</td><td>160,00</td><td>163,33</td><td><span class="result">168,33</span></td>
+          </table>
+        </div></div>
+
+        <div class="step"><div class="num">b</div><div class="content">
+          <p>Con el pronóstico y el valor real de cada mes 4-6, calculas el error \(e_t = A_t - F_t\):</p>
+          <table>
+            <tr><th>Mes</th><th>\(A_t\)</th><th>\(F_t\)</th><th>\(e_t\)</th></tr>
+            <tr><td>4</td><td>155</td><td>158,33</td><td>−3,33</td></tr>
+            <tr><td>5</td><td>170</td><td>160,00</td><td>+10,00</td></tr>
+            <tr><td>6</td><td>180</td><td>163,33</td><td>+16,67</td></tr>
+          </table>
+          \[ MFE = \frac{-3{,}33+10{,}00+16{,}67}{3} = \mathbf{7{,}78} \qquad MAE = \frac{3{,}33+10{,}00+16{,}67}{3} = \mathbf{10{,}00} \]
+          \[ RMSE = \sqrt{\frac{3{,}33^2+10{,}00^2+16{,}67^2}{3}} = \mathbf{11{,}39} \qquad MAPE = \frac{100}{3}\left(\frac{3{,}33}{155}+\frac{10}{170}+\frac{16{,}67}{180}\right)= \mathbf{5{,}76\%} \]
+        </div></div>
+
+        <div class="step"><div class="num">c</div><div class="content">
+          <p><strong>Métricas escaladas por la demanda:</strong> se toma el error medio (MAE o RMSE) y se divide por la demanda <em>promedio</em> del mismo tramo, para expresarlo como porcentaje comparable entre productos de distinta escala:</p>
+          \[ \bar{A} = \frac{155+170+180}{3} = 168{,}33 \]
+          \[ \text{MAE escalado} = \frac{10{,}00}{168{,}33} = \mathbf{5{,}94\%} \qquad \text{RMSE escalado} = \frac{11{,}39}{168{,}33} = \mathbf{6{,}77\%} \]
+          <div class="note"><strong>Interpretación:</strong> en promedio, el pronóstico se equivoca por cerca de un 6-7% de la demanda real, y el MFE positivo (+7,78) indica que el modelo <em>subestima</em> sistemáticamente las ventas (pronostica menos de lo que realmente se vende) — señal de que hay una tendencia creciente que el promedio móvil, al "mirar hacia atrás", no alcanza a capturar.</div>
+        </div></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="topic" id="p2-pmp">
+    <h3>8. Promedio móvil ponderado (PMP)</h3>
+    <div class="formula-box">
+      <span class="label">Fórmula</span>
+      \[ F_t = \sum w_i \cdot A_{t-i} \qquad \text{con } \sum w_i = 1 \]
+    </div>
+    <p>Igual que el PMS, pero en vez de promediar en partes iguales, le asignas un peso mayor a los datos más recientes (por ejemplo, 0,6 / 0,3 / 0,1 en el ejercicio 2). El procedimiento para calcular MFE, MAE, RMSE y las métricas escaladas es <strong>idéntico</strong> al del PMS una vez que tienes los \(F_t\): solo cambia cómo obtuviste el pronóstico.</p>
+    <div class="note"><strong>Cuidado con el orden de los pesos:</strong> en el ejercicio 2, el peso 0,6 se multiplica por el dato <em>más reciente</em> (semana \(t-1\)), 0,3 por el segundo más reciente y 0,1 por el más antiguo de la ventana. Por ejemplo, para pronosticar la semana 4 con datos de semanas 1-3 (50, 53, 52): \(F_4 = 0{,}6(52)+0{,}3(53)+0{,}1(50)=52{,}1\).</div>
+  </article>
+
+  <article class="topic" id="p2-ses">
+    <h3>9. Suavización exponencial simple (SES)</h3>
+    <div class="formula-box">
+      <span class="label">Fórmula</span>
+      \[ F_t = F_{t-1} + \alpha(A_{t-1}-F_{t-1}) \]
+    </div>
+    <p>En vez de promediar \(n\) períodos, corrige el pronóstico anterior en función del error que acabas de cometer. \(\alpha\) (entre 0 y 1) controla cuánto "caso" le haces al error más reciente: \(\alpha\) alto reacciona rápido a cambios, \(\alpha\) bajo suaviza más el ruido.</p>
+
+    <div class="example">
+      <div class="ex-head"><span>Ejemplo resuelto</span><span class="src">Ejercicio 3</span></div>
+      <div class="ex-body">
+        <p><strong>Datos:</strong> demanda 120, 130, 125, 140, 135 (meses 1-5). \(\alpha=0{,}2\), \(F_1=120\).</p>
+
+        <div class="step"><div class="num">a</div><div class="content">
+          <p>Aplicas la fórmula recursivamente, mes a mes:</p>
+          \[ F_2 = 120+0{,}2(120-120)=120{,}00 \]
+          \[ F_3 = 120+0{,}2(130-120)=122{,}00 \]
+          \[ F_4 = 122+0{,}2(125-122)=122{,}60 \]
+          \[ F_5 = 122{,}6+0{,}2(140-122{,}6)=\mathbf{126{,}08} \]
+        </div></div>
+
+        <div class="step"><div class="num">b</div><div class="content">
+          <p>Errores para los meses 2 a 5:</p>
+          <table>
+            <tr><th>Mes</th><th>\(A_t\)</th><th>\(F_t\)</th><th>\(e_t\)</th></tr>
+            <tr><td>2</td><td>130</td><td>120,00</td><td>10,00</td></tr>
+            <tr><td>3</td><td>125</td><td>122,00</td><td>3,00</td></tr>
+            <tr><td>4</td><td>140</td><td>122,60</td><td>17,40</td></tr>
+            <tr><td>5</td><td>135</td><td>126,08</td><td>8,92</td></tr>
+          </table>
+          \[ MFE = MAE = \frac{10+3+17{,}4+8{,}92}{4} = \mathbf{9{,}83} \qquad RMSE = \sqrt{\frac{10^2+3^2+17{,}4^2+8{,}92^2}{4}} = \mathbf{11{,}08} \]
+        </div></div>
+
+        <div class="step"><div class="num">c</div><div class="content">
+          \[ \bar{A} = \frac{130+125+140+135}{4}=132{,}5 \]
+          \[ \text{MAE escalado} = \frac{9{,}83}{132{,}5} = \mathbf{7{,}42\%} \qquad \text{RMSE escalado} = \frac{11{,}08}{132{,}5} = \mathbf{8{,}36\%} \]
+          <div class="note">Como MFE = MAE (todos los errores salieron positivos), el modelo subestima consistentemente la demanda en este tramo: un \(\alpha=0{,}2\) reacciona muy lento frente a una demanda que está subiendo.</div>
+        </div></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="topic" id="p2-errores">
+    <h3>10. Métricas de error: resumen de fórmulas</h3>
+    <p>Estas cuatro métricas se calculan siempre de la misma forma, sea cual sea el método de pronóstico usado. Solo cambian los \(F_t\) que le entregas.</p>
+    <table>
+      <tr><th>Métrica</th><th>Fórmula</th><th>¿Para qué sirve?</th></tr>
+      <tr><td class="rowlabel">MFE (error medio)</td><td>\(\dfrac{\sum(A_t-F_t)}{n}\)</td><td>Detecta <em>sesgo</em>: si es muy distinto de 0, el modelo sobre o subestima sistemáticamente.</td></tr>
+      <tr><td class="rowlabel">MAE (error absoluto medio)</td><td>\(\dfrac{\sum|A_t-F_t|}{n}\)</td><td>Magnitud típica del error, sin que los signos se cancelen.</td></tr>
+      <tr><td class="rowlabel">RMSE</td><td>\(\sqrt{\dfrac{\sum(A_t-F_t)^2}{n}}\)</td><td>Como el MAE, pero penaliza más fuerte los errores grandes (outliers).</td></tr>
+      <tr><td class="rowlabel">MAPE</td><td>\(\dfrac{100}{n}\sum\left|\dfrac{A_t-F_t}{A_t}\right|\)</td><td>Error en porcentaje; permite comparar series de distinta escala.</td></tr>
+    </table>
+    <div class="note"><strong>Métricas "escaladas por la demanda":</strong> cuando el ejercicio pide esto además del MAPE, se refiere a expresar el MAE o el RMSE (que están en las mismas unidades que la demanda) como porcentaje de la demanda <em>promedio</em> del tramo analizado: \( \text{MAE escalado} = MAE/\bar{A}\) y \(\text{RMSE escalado}=RMSE/\bar{A}\). A diferencia del MAPE —que promedia el error relativo <em>de cada período</em>— esta métrica usa un único promedio de demanda como referencia, lo que la hace menos sensible a un período puntual con demanda muy baja.</div>
+  </article>
+
+  <article class="topic" id="p2-holt">
+    <h3>11. Doble suavización exponencial — Modelo de Holt</h3>
+    <p>Cuando la demanda tiene una <strong>tendencia</strong> (sube o baja de forma sostenida), la SES se queda sistemáticamente atrás. Holt agrega una segunda ecuación que sigue el ritmo de esa tendencia.</p>
+    <div class="formula-box">
+      <span class="label">Fórmulas</span>
+      \[ a_t = \alpha A_t + (1-\alpha)(a_{t-1}+b_{t-1}) \]
+      \[ b_t = \beta(a_t-a_{t-1}) + (1-\beta) b_{t-1} \]
+      \[ \hat{y}_{t+k} = a_t + b_t \cdot k \]
+    </div>
+    <p>\(a_t\) es el <em>nivel</em> (dónde está la serie ahora, ya sin tendencia) y \(b_t\) es la <em>pendiente</em> estimada (cuánto crece por período). El pronóstico a \(k\) períodos hacia adelante simplemente proyecta esa recta.</p>
+
+    <div class="example">
+      <div class="ex-head"><span>Ejemplo resuelto</span><span class="src">Ejercicio 5 — ventas trimestrales</span></div>
+      <div class="ex-body">
+        <p><strong>Datos:</strong> 200, 220, 240, 260, 285, 310 (trimestres 1-6). \(\alpha=0{,}3\), \(\beta=0{,}1\), \(a_1=F_1=200\), \(b_1=20\).</p>
+
+        <div class="step"><div class="num">1</div><div class="content">
+          <p>Iteras nivel y tendencia trimestre a trimestre:</p>
+          <table>
+            <tr><th>t</th><th>\(A_t\)</th><th>\(a_t\)</th><th>\(b_t\)</th><th>\(F_t=a_{t-1}+b_{t-1}\)</th></tr>
+            <tr><td>2</td><td>220</td><td>220,00</td><td>20,00</td><td>220,00</td></tr>
+            <tr><td>3</td><td>240</td><td>240,00</td><td>20,00</td><td>240,00</td></tr>
+            <tr><td>4</td><td>260</td><td>260,00</td><td>20,00</td><td>260,00</td></tr>
+            <tr><td>5</td><td>285</td><td>281,50</td><td>20,15</td><td>280,00</td></tr>
+            <tr><td>6</td><td>310</td><td>304,16</td><td>20,40</td><td>301,65</td></tr>
+          </table>
+          <div class="note">Nota cómo hasta el trimestre 4 el pronóstico calza perfecto con lo real (error 0): la serie venía creciendo exactamente 20 unidades por trimestre, que es justo la tendencia inicial que asumiste. El "quiebre" aparece recién en los trimestres 5 y 6, cuando el crecimiento se acelera.</div>
+        </div></div>
+
+        <div class="step"><div class="num">2</div><div class="content">
+          <p><strong>Pronóstico del trimestre 7:</strong></p>
+          \[ F_7 = a_6 + b_6 = 304{,}16+20{,}40 = \mathbf{324{,}56} \]
+        </div></div>
+
+        <div class="step"><div class="num">3</div><div class="content">
+          <p>Errores (\(t=2\) a \(6\)): 0, 0, 0, 5,00 y 8,35.</p>
+          \[ MFE=MAE=\frac{0+0+0+5{,}00+8{,}35}{5}=\mathbf{2{,}67} \qquad RMSE=\sqrt{\frac{0+0+0+5{,}00^2+8{,}35^2}{5}}=\mathbf{4{,}35} \]
+          \[ MAPE = \frac{100}{5}\left(0+0+0+\frac{5{,}00}{285}+\frac{8{,}35}{310}\right)=\mathbf{0{,}89\%} \]
+          \[ \bar{A}=263 \Rightarrow \text{MAE escalado}=1{,}02\% \quad \text{RMSE escalado}=1{,}65\% \]
+          <div class="note"><strong>Interpretación:</strong> los errores son minúsculos (menos de 1% de la demanda) porque la serie es casi perfectamente lineal; Holt es exactamente el modelo correcto para este patrón. Este es el mismo procedimiento para los ejercicios 6, 7 y 8 de la guía (que en realidad piden SES o promedio móvil, no Holt — revisa bien qué te pide cada enunciado antes de aplicar la fórmula).</div>
+        </div></div>
+      </div>
+    </div>
+  </article>
+
+  <!-- ======================= PARTE III ======================= -->
+  <section class="part-intro" id="parte3">
+    <h2><span class="tag">Parte III</span> Modelos de Holt-Winters</h2>
+    <p>Corresponde a la sección B de tu <em>Guía de Ejercicios II</em> (ejercicios 9 a 13): series con estacionalidad.</p>
+  </section>
+
+  <article class="topic" id="p3-concepto">
+    <h3>12. ¿Cuándo hay estacionalidad, y aditiva o multiplicativa?</h3>
+    <p>Una serie es <strong>estacional</strong> cuando se repite un patrón cada cierto número fijo de períodos (por ejemplo, cada 4 trimestres). Holt-Winters agrega una tercera ecuación, \(S_t\), que sigue ese patrón.</p>
+    <ul>
+      <li><strong>Aditivo:</strong> la estacionalidad es un monto fijo que se suma o resta al nivel (ej. "en diciembre siempre se venden 20 unidades más"). Se usa cuando la amplitud estacional es <em>constante</em> independiente del tamaño de la demanda.</li>
+      <li><strong>Multiplicativo:</strong> la estacionalidad es un porcentaje/índice que se multiplica por el nivel (ej. "en diciembre se vende un 20% más"). Se usa cuando la amplitud estacional <em>crece</em> junto con el nivel de la serie (por eso el enunciado dice "estacionalidad proporcional al nivel").</li>
+    </ul>
+  </article>
+
+  <article class="topic" id="p3-sintendencia">
+    <h3>13. Holt-Winters sin tendencia (aditivo)</h3>
+    <div class="formula-box">
+      <span class="label">Fórmulas (\(s\) = largo del ciclo estacional, en este caso 4)</span>
+      \[ a_t = \alpha(A_t - S_{t-s}) + (1-\alpha)\,a_{t-1} \]
+      \[ S_t = \gamma(A_t - a_t) + (1-\gamma)\,S_{t-s} \]
+      \[ F_{t+k} = a_t + S_{t-s+k} \]
+    </div>
+    <p>El nivel se actualiza con la demanda <em>desestacionalizada</em> (le restas el índice estacional de "hace un ciclo"), y el índice estacional se recalcula comparando la demanda real contra el nivel recién estimado.</p>
+
+    <div class="example">
+      <div class="ex-head"><span>Ejemplo resuelto</span><span class="src">Ejercicio 9</span></div>
+      <div class="ex-body">
+        <p><strong>Datos:</strong> demanda meses 1-8: 80, 95, 110, 100, 85, 100, 120, 105. \(\alpha=0{,}3\), \(\gamma=0{,}2\). Índices iniciales: \(S_1=-10,\ S_2=5,\ S_3=20,\ S_4=10\).</p>
+
+        <div class="step"><div class="num">1</div><div class="content">
+          <p><strong>Nivel inicial</strong> (\(a_4\)): se promedian los primeros 4 meses (un ciclo completo) para partir con un nivel "limpio" de estacionalidad:</p>
+          \[ a_4 = \frac{80+95+110+100}{4} = \mathbf{96{,}25} \]
+        </div></div>
+
+        <div class="step"><div class="num">2</div><div class="content">
+          <p>Desde el mes 5 en adelante, ya usas las fórmulas de Holt-Winters (cada mes reutiliza el índice \(S\) de 4 meses atrás):</p>
+          <table>
+            <tr><th>t</th><th>\(A_t\)</th><th>\(S_{t-4}\)</th><th>\(a_t\)</th><th>\(S_t\)</th><th>\(F_t\)</th></tr>
+            <tr><td>5</td><td>85</td><td>−10</td><td>95,88</td><td>−10,18</td><td>86,25</td></tr>
+            <tr><td>6</td><td>100</td><td>5</td><td>95,61</td><td>4,88</td><td>100,88</td></tr>
+            <tr><td>7</td><td>120</td><td>20</td><td>96,93</td><td>20,61</td><td>115,61</td></tr>
+            <tr><td>8</td><td>105</td><td>10</td><td>96,35</td><td>9,73</td><td>106,93</td></tr>
+          </table>
+        </div></div>
+
+        <div class="step"><div class="num">3</div><div class="content">
+          <p><strong>Pronóstico del mes 9</strong> (reutiliza el índice del mes 5, que es \(t-s+k = 8-4+1\)):</p>
+          \[ F_9 = a_8 + S_5 = 96{,}35+(-10{,}18) = \mathbf{86{,}18} \]
+        </div></div>
+
+        <div class="step"><div class="num">4</div><div class="content">
+          <p>Errores meses 5-8: −1,25 / −0,88 / +4,39 / −1,93.</p>
+          \[ MFE = \mathbf{0{,}08} \qquad MAE = \mathbf{2{,}11} \qquad RMSE = \mathbf{2{,}51} \]
+          \[ \bar{A}=102{,}5 \Rightarrow \text{MAE escalado}=2{,}06\% \quad \text{RMSE escalado}=2{,}45\% \]
+          <div class="note">El MFE cercano a 0 indica que, a diferencia de los ejemplos anteriores, este modelo <strong>no tiene sesgo</strong>: los errores positivos y negativos se compensan porque ya está capturando el patrón estacional.</div>
+        </div></div>
+
+        <div class="warn"><strong>Sobre el nivel inicial:</strong> distintos apuntes/profesores inicializan \(a_s\) de formas levemente distintas (promedio del primer ciclo, o \(A_s - S_s\), etc.). Usa siempre la convención que tu profesor haya definido en clases; el procedimiento de iteración de ahí en adelante es el mismo.</div>
+      </div>
+    </div>
+  </article>
+
+  <article class="topic" id="p3-contendencia">
+    <h3>14. Holt-Winters con tendencia</h3>
+    <p>Cuando además de estacionalidad hay una tendencia sostenida (ejercicios 10, 11 y 13), agregas la ecuación de tendencia \(b_t\) de Holt a las ecuaciones de nivel y estacionalidad.</p>
+
+    <h4>Versión aditiva</h4>
+    <div class="formula-box">
+      \[ a_t = \alpha(A_t - S_{t-s}) + (1-\alpha)(a_{t-1}+b_{t-1}) \]
+      \[ b_t = \beta(a_t-a_{t-1}) + (1-\beta)\,b_{t-1} \]
+      \[ S_t = \gamma(A_t-a_t) + (1-\gamma)\,S_{t-s} \]
+      \[ F_{t+k} = a_t + b_t\cdot k + S_{t-s+k} \]
+    </div>
+
+    <h4>Versión multiplicativa</h4>
+    <div class="formula-box">
+      \[ a_t = \alpha\frac{A_t}{S_{t-s}} + (1-\alpha)(a_{t-1}+b_{t-1}) \]
+      \[ b_t = \beta(a_t-a_{t-1}) + (1-\beta)\,b_{t-1} \]
+      \[ S_t = \gamma\frac{A_t}{a_t} + (1-\gamma)\,S_{t-s} \]
+      \[ F_{t+k} = (a_t + b_t\cdot k)\times S_{t-s+k} \]
+    </div>
+    <p>La única diferencia estructural entre ambas es que donde el modelo aditivo <em>resta</em> el índice estacional para desestacionalizar, el multiplicativo <em>divide</em> por él; y donde el aditivo <em>suma</em> el índice al pronosticar, el multiplicativo <em>multiplica</em>.</p>
+    <div class="note"><strong>Cómo abordar los ejercicios 10-13:</strong> arma una tabla como la del ejemplo anterior con columnas \(t, A_t, S_{t-s}, a_t, b_t, S_t, F_t\), y ve completando fila por fila —el orden de cálculo dentro de cada fila es siempre: primero \(a_t\), luego \(b_t\) (si aplica), y al final \(S_t\), porque \(S_t\) necesita el \(a_t\) recién calculado. El ejercicio 13 pide además pronosticar <em>dos</em> períodos hacia adelante (mes 9 y 10): usa \(k=1\) y \(k=2\) respectivamente en la fórmula de \(F_{t+k}\), ambos calculados desde el mismo \(a_8\) y \(b_8\), pero reutilizando el índice estacional correspondiente a cada mes.</div>
+  </article>
+
+  <article class="topic" id="p3-matriz">
+    <h3>15. Matriz de decisión: ¿qué modelo aplicar?</h3>
+    <div class="matrix-box">
+    <table>
+      <tr><th></th><th>Sin estacionalidad</th><th>Con estacionalidad</th></tr>
+      <tr><td class="rowlabel">Sin tendencia</td><td>Promedio móvil / SES</td><td>Holt-Winters sin tendencia</td></tr>
+      <tr><td class="rowlabel">Con tendencia</td><td>Holt (doble suavización) / Regresión lineal</td><td>Holt-Winters con tendencia (aditivo o multiplicativo)</td></tr>
+    </table>
+    </div>
+    <p>Antes de ponerte a calcular, léete el enunciado y clasifica la serie en esta matriz —eso te dice de inmediato qué set de fórmulas usar. La pista casi siempre está explícita en el texto ("estacionalidad proporcional al nivel" → multiplicativo; "estacionalidad aproximadamente constante" → aditivo; "sin tendencia clara" → omite \(b_t\)).</p>
+  </article>
+
+  <section class="part-intro" id="tips">
+    <h2><span class="tag">Cierre</span> Cómo enfrentar cada ejercicio</h2>
+  </section>
+  <article class="topic">
+    <ol>
+      <li><strong>Clasifica el patrón de la serie</strong> con la matriz de decisión antes de escribir cualquier fórmula.</li>
+      <li><strong>Arma una tabla</strong> con una columna por variable (\(t, A_t, F_t, a_t, b_t, S_t\), según el método) y complétala fila por fila; nunca calcules "saltado" porque cada valor depende del anterior.</li>
+      <li><strong>Guarda los errores</strong> (\(e_t = A_t - F_t\)) apenas tengas cada par (real, pronóstico) — los necesitarás todos juntos para las métricas al final.</li>
+      <li><strong>Calcula MFE, MAE, RMSE y MAPE</strong> con las fórmulas de la sección 10, siempre sobre el mismo tramo de períodos que indica el enunciado.</li>
+      <li><strong>Interpreta, no solo calcules:</strong> un MFE ≈ 0 significa modelo sin sesgo; MFE muy positivo, el modelo subestima; muy negativo, sobreestima. Compara el MAE/RMSE escalado entre ejercicios para decir cuál pronóstico es "mejor" en términos relativos.</li>
+    </ol>
+  </article>
+
+  <footer class="doc-footer">
+    Guía de estudio elaborada a partir de "Ejercicios Propuestos I" y "Ejercicios Propuestos II" (Facultad de Administración y Economía, Escuela de Ingeniería Comercial, UDP) y del formulario de Gestión de Operaciones. Fórmulas renderizadas con MathJax.
+  </footer>
+</main>
+</div>
+</body>
+</html>
